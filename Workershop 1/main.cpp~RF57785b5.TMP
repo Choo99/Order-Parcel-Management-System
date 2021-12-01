@@ -1,0 +1,1134 @@
+#include <iostream>
+#include <string>
+#include <iomanip>
+#include <cmath>
+#include <mysql/jdbc.h>
+using namespace std;
+using namespace sql;
+
+#include "DatabaseConnection.h"
+#include "User.h"
+#include "UserManager.h"
+#include "Staff.h"
+#include "StaffManager.h"
+#include "ProductType.h"
+#include "ProductTypeManager.h"
+#include "Supplier.h"
+#include "SupplierManager.h"
+#include "Product.h"
+#include "ProductManager.h"
+#include "RestockRequest.h"
+#include "RestockRequestManager.h"
+#include "Order.h"
+#include "OrderManager.h"
+#include "OrderDetail.h"
+#include "OrderDetailManager.h"
+#include "Role.h"
+#include "UserInputManager.h"
+
+
+
+void mainMenu(Staff* staff);
+void orderMenu(Staff* staff);
+void productMenu(Staff* staff);
+void restockRequestMenu(Staff* staff);
+void staffMenu(Staff* staff);
+void supplierMenu(Staff* staff);
+void productTypeMenu(Staff* staff);
+
+int validatePassword(Staff* staff);
+
+int main()
+{
+	//////////////////////////////////////////////create a new product type////////////////////////////////////////////////////
+	//system("COLOR 81");
+	StaffManager staffManager;
+	ProductTypeManager productTypeManager;
+	SupplierManager supplierManager;
+	ProductManager productManager;
+	RestockRequestManager restockRequestManager;
+	OrderDetailManager orderDetailManager;
+	OrderManager orderManager;
+	Staff* staff = new Staff;
+	staff->StaffID = 2010;
+	Product* product = new Product;
+	Order* order = new Order;
+	Role* role = new Role;
+	RestockRequest* restockRequest = new RestockRequest();
+	OrderDetail* orderDetail = new OrderDetail;
+	ProductType* productType = new ProductType;
+	Supplier* supplier = new Supplier;
+	UserInputManager userInputManager;
+	User* user = new User();
+	UserManager userManager;
+	string text = "haha";
+
+	//userManager.insertUser();
+	//staffManager.insertStaff(user, staff);
+	//orderManager.insertOrder(staff);
+	//restockRequestManager.insertRestockRequest(staff);
+	//productManager.insertProduct();
+	//supplierManager.insertSupplier();
+	//productTypeManager.insertProductType();
+
+	//string num3 = num1 + " " + num2;
+	//cout << num3;
+	//userInputManager.drawRowBody("Id", to_string(num1) + " " + to_string(num2), 20, 30);
+/////////////////////////////////////////////////////////////////////////////tables//////////////////////////////////////////////////////////////////////////////////
+	//productManager.viewProduct();
+	//productManager.viewProductDetail();
+	//productManager.viewProductDetailPrice();
+	//productManager.viewSoldOutProduct();
+
+	//supplierManager.viewSupplier();
+	//productTypeManager.viewProductType();
+
+	//restockRequestManager.viewRestockRequestDetail();
+	//restockRequestManager.viewRequest();
+	/////////////////////////////////////////////////////////////////////restockRequestManager.viewRestockRequestPrice();
+	staff->UserID = 1001;
+	staff->StaffID = 2001;
+	staff->RoleID = 9003;
+	//restockRequestManager.searchStaffRequest(staff);
+
+	//orderDetailManager.viewOrderDetail();
+	//orderDetailManager.viewOrderDetailPrice();
+
+	//orderManager.viewOrder();
+	////////////////////////////////////////////////////////////////////orderManager.viewOrderPrice();
+
+	//staffManager.viewAll();
+	//staffManager.viewWorker();
+	/////////////////////////////////////////////////////////////////////////search tables////////////////////////////////////////////////////////////////////////////////
+
+	//orderDetailManager.search();						//done
+	//orderDetailManager.workerSearch();				//done
+
+	//orderManager.search();							//done
+	//orderManager.workerSearch();						//done
+
+	//restockRequestManager.searchRequest();			//done
+	//restockRequestManager.searchRequestPrice();		//done
+	//restockRequestManager.searchRequestDetail();		//done
+
+	//productManager.searchDetail();					//done
+	//productManager.searchDetailPrice();				//done
+
+	//staffManager.search();							//done
+	//staffManager.searchAll();						    //done
+
+	////////////////////////////////////////////////////////////////////////////////update query////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//orderDetailManager.updateQuantity(orderDetail);
+	//orderDetailManager.updateOriginalPrice(orderDetail);
+	//orderDetailManager.updateDiscount(orderDetail);;
+
+	//orderManager.updateOrderAddress(order);
+	//orderManager.updateOrderDate(order);
+	//orderManager.updateOrderPayment(order);
+	//orderManager.updateOrderPhoneNo(order);
+	//orderManager.updateOrderStatus(order);
+	/////////////////////////////////////////////////////////////////////////////////update menu/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	staff->UserID = 1001;
+	staff->StaffID = 2001;
+	staff->RoleID = 9001;
+	//staffManager.updateSalary();
+	//restockRequestManager.deleteRequest(staff);
+	//orderManager.deleteOrder(staff);
+	//orderDetailManager.updateMenu();
+	//orderManager.updateMenu(staff);
+	//productManager.updateMenu();
+	//restockRequestManager.updateMenu();
+	//supplierManager.updateMenu();
+	//userManager.updateMenu(staff);
+	//supplierManager.updateMenu();
+	//productManager.autoUpdateStatus();
+
+	long long num = 123000069;
+	string check = to_string(num);
+	int x = check.length();
+	cout<<setprecision(x)<<ceil((num/ pow(10, x-1))) * pow(10, x-1);
+	/*
+	for (int i = 0; i < 15; i++)
+	{
+		cout << endl;
+	}
+
+	int n1 = 15;
+	int n2 = 100;
+	int n3;
+	int n4;
+	int num[10] = { 10,20,30,40,50,60,70,80,90,100 };
+	int j = 0;
+	int k = 0;
+	cout <<char(30)<<endl;
+	for (int i = 0; i < n1; i++)
+	{
+		cout << char(179);
+		if (i % 2 == 0)
+		{
+			for (int j = 0; j < num[k]; j++)
+			{
+				cout << char(219);
+			}
+			cout << " " << num[k] << "%";
+			k++;
+		}
+		cout << endl;
+	}
+	
+	cout << char(179);
+	cout << endl;
+	cout << char(192);
+	for (int i = 2; i <= 99; i++)
+	{
+		cout << char(196);
+		if (i % 19 == 1)
+		{
+			cout << char(197);
+		}
+	}
+	cout << char(16);
+	cout << endl;
+	double number = 100.00;
+	cout <<"0"<< right << setw(21) << setfill(' ') << 1000 * 1 / 5 << setw(20) << setfill(' ') << 1000 * 2 / 5 << setw(20) << setfill(' ') << 1000 * 3 / 5 << setw(20) << setfill(' ') << 1000 * 4 / 5 << setw(20) << setfill(' ') << 1000 * 5 / 5;
+	*/
+	
+	/*
+	cout << " 80%";
+	cout << endl;
+	cout << char(179) << endl;
+	cout << char(179);
+	for (int i = 0; i < 70; i++)
+	{
+		cout << char(219);
+	}
+	cout << " 60%";
+	*/
+	//orderMenu(staff);
+	//staffMenu(staff);
+	//productMenu(staff);
+	//restockRequestMenu(staff);
+	//managerSupplier(staff);
+	//managerProductType(staff);
+	//userManager.updateMenu(staff);
+	staff->StaffName = "Choo Dik Pong";
+	//mainMenu(staff);
+
+	return 0;
+}
+
+void mainMenu(Staff* staff)
+{
+	UserInputManager user;
+	UserManager userManager;
+	SupplierManager supplierManager;
+	ProductTypeManager TypeManager;
+	string message;
+	int selection;
+
+	enum Role { admin = 9001, manager = 9002, worker = 9003 };
+
+	switch (staff->RoleID)
+	{
+	case admin:
+		while (1)
+		{
+			enum List { order = 1, worker = 2, product = 3, restock = 4, supplier = 5, productType = 6, account = 7, report = 8, quit = 9 };
+			cout << "Welcome back, " << staff->StaffName << "!\n";
+			user.drawTittle(" Main menu ", 12, 10);
+			cout << "1. Manage Order\n";
+			cout << "2. Manage Staff\n";
+			cout << "3. Manage Product\n";
+			cout << "4. Manager Restock Request\n";
+			cout << "5. Manage Supplier\n";
+			cout << "6. Manage Product Type\n";
+			cout << "7. Manage account setting\n";
+			cout << "8. Financial Report\n";
+			cout << "9. Exit\n";
+
+			cout << "\nWhat do you want to do?\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 9);
+			system("cls");
+
+
+			switch (selection)
+			{
+			case order:
+				orderMenu(staff);
+				break;
+			case worker:
+				staffMenu(staff);
+				break;
+			case product:
+				productMenu(staff);
+				break;
+			case restock:
+				restockRequestMenu(staff);
+				break;
+			case supplier:
+				supplierMenu(staff);
+				break;
+			case productType:
+				productTypeMenu(staff);
+				break;
+			case account:
+				userManager.updateMenu(staff);
+				break;
+			case report:
+				//financial report!!!!!!!!!!!!
+				break;
+			case quit:
+				return;
+				break;
+			}
+		}
+		break;
+	case manager:
+		while (1)
+		{
+			enum List { order = 1, worker = 2, product = 3, restock = 4, supplier = 5, productType = 6, account = 7, quit = 8 };
+			cout << "Welcome back, " << staff->StaffName << "!\n";
+			user.drawTittle(" Main menu ", 12, 10);
+			cout << "1. Manage Order\n";
+			cout << "2. Manage Staff\n";
+			cout << "3. Manage Product\n";
+			cout << "4. Manager Restock Request\n";
+			cout << "5. Manage Supplier\n";
+			cout << "6. Manage Product Type\n";
+			cout << "7. Manage account setting\n";
+			cout << "8. Exit\n";
+
+			cout << "\nWhat do you want to do?\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 8);
+			system("cls");
+
+			switch (selection)
+			{
+			case order:
+				orderMenu(staff);
+				break;
+			case worker:
+				staffMenu(staff);
+				break;
+			case product:
+				productMenu(staff);
+				break;
+			case restock:
+				restockRequestMenu(staff);
+				break;
+			case supplier:
+				supplierMenu(staff);
+				break;
+			case productType:
+				productTypeMenu(staff);
+				break;
+			case account:
+				userManager.updateMenu(staff);
+				break; 
+			case quit:
+				return;
+				break;
+			}
+		}
+		break;
+	case worker:
+		while (1)
+		{
+			enum List { order = 1, worker = 2, product = 3, restock = 4, supplier = 5, productType = 6, account = 7, quit = 8 };
+			cout << "Welcome back, " << staff->StaffName << "!\n";
+			user.drawTittle(" Main menu ", 12, 10);
+
+			cout << "1. Manage Order\n";
+			cout << "2. Manage worker\n";
+			cout << "3. Manage Product\n";
+			cout << "4. Manager Restock Request\n";
+			cout << "5. View Supplier\n";
+			cout << "6. View Product Type\n";
+			cout << "7. Manage account setting\n";
+			cout << "8. Exit\n";
+
+			cout << "\nWhat do you want to do?\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 8);
+			system("cls");
+			switch (selection)
+			{
+			case order:
+				orderMenu(staff);
+				break;
+			case worker:
+				staffMenu(staff);
+				break;
+			case product:
+				productMenu(staff);
+				break;
+			case restock:
+				restockRequestMenu(staff);
+				break;
+			case supplier:
+				supplierManager.viewSupplier();
+				system("pause");
+				system("cls");
+				break;
+			case productType:
+				TypeManager.viewProductType();
+				system("pause");
+				system("cls");
+				break;
+			case account:
+				userManager.updateMenu(staff);
+				break;
+			case quit:
+				return;
+				break;
+			}
+		}
+		break;
+	}
+}
+
+void orderMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	OrderManager orderManager;
+	ProductManager productManager;
+	OrderDetailManager orderDetailManager;
+
+	enum Role { admin = 9001, manager = 9002, worker = 9003 };
+
+	switch(staff->RoleID)
+	{
+	case admin:
+		while (1)
+		{
+			enum list { displayOrder = 1, displayOrderDetail = 2, searchOrder = 3, searchOrderDetail = 4, cancelOrder = 5, quit = 6 };
+			message = "Order Menu";
+			user.drawTittle(message, message.size() + 1, 8);
+			cout << "1. Display processing orders\n";
+			cout << "2. Display processing order's detail\n";
+			cout << "3. Display specific order\n";
+			cout << "4. Display specific order's detail\n";
+			cout << "5. Cancel an order record\n";
+			cout << "6. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 6);
+			system("cls");
+			switch (selection)
+			{
+			case displayOrder:
+				orderManager.viewOrder();
+				message = "Do you want to search specific order? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					orderManager.workerSearch();
+				}
+				system("cls");
+				break;
+			case displayOrderDetail:
+				orderDetailManager.viewOrderDetailPrice();
+				message = "Do you want to search specific order detail? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					orderDetailManager.search();
+				}
+				system("cls");
+				break;
+			case searchOrder:
+				orderManager.search();
+				break;
+			case searchOrderDetail:
+				orderDetailManager.search();
+				break;
+			case cancelOrder:
+				orderManager.deleteOrder(staff);
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case manager:
+		while (1)
+		{
+			enum list { createOrder = 1, displayOrder = 2, displayOrderDetail = 3, searchOrder = 4, searchOrderDetail = 5, updateOrder = 6, updateOrderDetail = 7, quit = 8 };
+			message = "Order Menu";
+			user.drawTittle(message, message.size() + 1, 8);
+			cout << "1. Create new order\n";
+			cout << "2. Display processing orders\n";
+			cout << "3. Display processing order's detail\n";
+			cout << "4. Display specific order\n";
+			cout << "5. Display specific order's detail\n";
+			cout << "6. Modify order record\n";
+			cout << "7. Modify order's detail\n";
+			cout << "8. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 8);
+			system("cls");
+			switch (selection)
+			{
+			case createOrder:
+				orderManager.insertOrder(staff);
+				break;
+			case displayOrder:
+				orderManager.viewOrder();
+				message = "Do you want to search a specific order? <Y/N> : ";
+				user.getChoice(message, choice);
+				//if only one result get from search offer choice to looking order detail of this order
+				if (choice[0] == 'Y')
+				{
+					orderManager.workerSearch();
+				}
+				system("cls");
+				break;
+			case displayOrderDetail:
+				orderDetailManager.viewOrderDetailPrice();
+				message = "Do you want to search a specific order's detail? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					orderDetailManager.search();
+				}
+				system("cls");
+				break;
+			case  searchOrder:
+				orderManager.search();
+				break;
+			case searchOrderDetail:
+				orderDetailManager.workerSearch();
+				break;
+			case updateOrder:
+				orderManager.updateMenu(staff);
+				break;
+			case updateOrderDetail:
+				orderDetailManager.updateMenu();
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case worker:
+		while (1)
+		{
+			enum List { viewOrder = 1, viewOrderDetail = 2, searchOrder = 3, searchOrderDetail = 4, updateOrderStatus = 5, quit = 6 };
+			message = "Order Menu";
+			user.drawTittle(message, message.size() + 1, 8);
+			cout << "1. Display processing orders\n";
+			cout << "2. Display processing order's detail\n";
+			cout << "3. Display specific order\n";
+			cout << "4. Display specific order's detail record\n";
+			cout << "5. Modify order's status\n";
+			cout << "6. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 9);
+			system("cls");
+			switch (selection)
+			{
+			case viewOrder:
+				orderManager.viewOrder();
+				message = "Do you want to search a specific order? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					orderManager.workerSearch();
+				}
+				break;
+			case viewOrderDetail:
+				orderDetailManager.viewOrderDetail();
+				message = "Do you want to search a specific order's detail? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					orderDetailManager.workerSearch();
+				}
+				break;
+			case searchOrder:
+				orderManager.workerSearch();
+				break;
+			case searchOrderDetail:
+				orderDetailManager.workerSearch();
+				break;
+			case updateOrderStatus:
+				orderManager.update(staff, "OrderStatus", "Order Status", 3);
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	}
+}
+
+void staffMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	StaffManager staffManager;
+	UserManager userManager;
+
+	enum Role { admin = 9001, manager = 9002, worker = 9003 };
+
+	switch (staff->RoleID)
+	{
+	case admin:
+		while (1)
+		{
+			enum List { insert = 1, view = 2, search = 3, salary = 4, quit = 5 };
+
+			message = "Staff Menu";
+			user.drawTittle(message, message.length() + 1, 10);
+			cout << "1. Register new staff\n";
+			cout << "2. Display all staffs' information\n";
+			cout << "3. Display specific staff's information\n";
+			cout << "4. Update staff salary\n";
+			cout << "5. Quit\n";
+
+			cout << "\n";
+			message = "Please select one from the table above : ";
+			user.getInt(message, selection, 1, 5);
+			system("cls");
+			switch (selection)
+			{
+			case insert:
+				userManager.insertUser();
+				break;
+			case view:
+				staffManager.viewAll();
+				message = "Do you want to search for specific staff? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					staffManager.searchAll();
+				}
+				system("cls");
+				break;
+			case search:
+				staffManager.searchAll();
+				break;
+			case salary:
+				staffManager.updateSalary();
+				break;
+			case quit:
+				return;
+				break;
+			}
+		}
+		break;
+	case manager:
+		while (1)
+		{
+			enum List { view = 1, search = 2, quit = 3 };
+
+			message = "Staff Menu";
+			user.drawTittle(message, message.length() + 1, 10);
+			cout << "1. Display warehouse workers information\n";
+			cout << "2. Display specific warehouse workers information\n";
+			cout << "3. Quit\n";
+
+			cout << "\n";
+			message = "Please select one from the table above : ";
+			user.getInt(message, selection, 1, 3);
+			system("cls");
+			switch (selection)
+			{
+			case view:
+				staffManager.viewWorker();
+				message = "Do you want to search specific worker? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					staffManager.search();
+				}
+				system("cls");
+				break;
+			case search:
+				staffManager.search();
+				break;
+			case quit:
+				return;
+				break;
+			}
+		}
+		break;
+	case worker:
+		enum List { view = 1, search = 2, quit = 3 };
+		while (1)
+		{
+			message = "Staff Menu";
+			user.drawTittle(message, message.length() + 1, 10);
+			cout << "1. Display warehouse workers information\n";
+			cout << "2. Display specific warehouse workers information\n";
+			cout << "3. Quit\n";
+
+			cout << "\n";
+			message = "Please select one from the table above : ";
+			user.getInt(message, selection, 1, 3);
+			
+			switch (selection)
+			{
+			case view:
+				staffManager.viewWorker();
+				message = "Do you want to search specific worker? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					staffManager.search();
+				}
+				break;
+			case search:
+				staffManager.search();
+				break;
+			case quit:
+				system("cls");
+				return;
+				break;
+			}
+		}
+		break;
+	}
+
+}
+
+void productMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	ProductManager productManager;
+	UserManager userManager;
+
+	enum Role { admin = 9001, manager = 9002, worker = 9003 };
+
+	switch (staff->RoleID)
+	{
+	case admin:
+		while (1)
+		{
+			enum List { insert = 1, view = 2, search = 3, update = 4, Delete = 5, quit = 6 };
+			message = "Product Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "1. Create new product\n";
+			cout << "2. Display product in store\n";
+			cout << "3. Display specific product\n";
+			cout << "4. Modify available product\n";
+			cout << "5. Delete a product\n";
+			cout << "6. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 6);
+			system("cls");
+			switch (selection)
+			{
+			case insert:
+				productManager.insertProduct(staff);
+				break;
+			case view:
+				productManager.viewProductDetailPrice();
+				message = "Do you want to search specific product? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					productManager.searchDetailPrice();
+				}
+				system("cls");
+				break;
+			case search:
+				productManager.searchDetailPrice();
+				break;
+			case update:
+				productManager.updateMenu();
+				break;
+			case Delete:
+				productManager.deleteProduct();
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case manager:
+		while (1)
+		{
+			enum List { view = 1, search = 2, update = 3, quit = 4 };
+			message = "Product Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "2. Display product in store\n";
+			cout << "3. Display specific product\n";
+			cout << "4. Modify available product\n";
+			cout << "6. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 6);
+			system("cls");
+			switch (selection)
+			{
+			case view:
+				productManager.viewProductDetailPrice();
+				message = "Do you want to search specific product? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					productManager.searchDetailPrice();
+				}
+				system("cls");
+				break;
+			case search:
+				productManager.searchDetailPrice();
+				break;
+			case update:
+				productManager.updateMenu();
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case worker:
+		while (1)
+		{
+			enum List { view = 1, search = 2, quit = 3 };
+			message = "Product Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "1. Display product in store\n";
+			cout << "2. Display specific product\n";
+			cout << "3. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 3);
+			system("cls");
+
+			switch (selection)
+			{
+			case view:
+				productManager.viewProductDetail();
+				message = "Do you want to search specific product? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					productManager.searchDetail();
+				}
+				system("cls");
+				break;
+			case search:
+				productManager.searchDetail();
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}	
+		break;
+	}
+}
+
+void restockRequestMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	RestockRequestManager restock;
+	UserManager userManager;
+	ProductManager productManager;
+
+	enum Role { admin = 9001, manager = 9002, worker = 9003 };
+
+	switch (staff->RoleID)
+	{
+	case admin:
+		while (1)
+		{
+			enum List { insert = 1, view = 2, search = 3, viewProduct = 4, update = 5, quit = 6 };
+			message = "Restock Request Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "1. Add a new restock of product\n";
+			cout << "2. Display pending restock request\n";
+			cout << "3. Search pending restock requests\n";
+			cout << "4. Display nearly sold out or out of stock product\n";
+			cout << "5. Approve pending restock requests\n";
+			cout << "6. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 7);
+			system("cls");
+			switch (selection)
+			{
+			case insert:
+				restock.insertRestockRequest(staff);
+				break;
+			case view:
+				restock.viewRestockRequestDetail(); 
+				message = "Do you want to search specific restock request? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					restock.searchRequestDetail();
+				}
+				system("cls");
+				break;
+			case search:
+				restock.searchRequestDetail();
+				break;
+			case viewProduct:
+				productManager.viewSoldOutProduct();
+				message = "Do you want to add a restock of product? <Y/N> : ";
+				user.getChoice(message, choice);
+				system("cls");
+				if (choice[0] == 'Y')
+				{
+					restock.insertRestockRequest(staff);
+				}
+				break;
+			case update:
+				restock.approveRequest();
+				break;
+			case quit:
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case manager:
+		while (1)
+		{
+			enum List { view = 1, search = 2, update = 3, quit = 4 };
+			message = "Restock Request Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "1. Display pending restock requests\n";
+			cout << "2. Search pending restock requests\n";
+			cout << "3. Approve pending restock requests\n";
+			cout << "4. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 4);
+
+			switch (selection)
+			{
+			case view:
+				system("cls");
+				restock.viewRestockRequestDetail();
+				message = "Do you want to search specific product? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					restock.searchRequestDetail();
+				}
+				system("cls");
+				break;
+			case search:
+				system("cls");
+				restock.searchRequestDetail();
+				break;
+			case update:
+				system("cls");
+				restock.approveRequest();
+				break;
+			case quit:
+				system("cls");
+				return;
+				break;
+			}
+			productManager.autoUpdateStatus();
+		}
+		break;
+	case worker:
+		while (1)
+		{
+			enum List { insert = 1, view = 2, search = 3, viewProduct = 4, update = 5, cancel = 6, quit = 7 };
+			message = "Restock Request Menu";
+			user.drawTittle(message, message.length() + 1, 8);
+			cout << "1. Add a new restock request\n";
+			cout << "2. Display pending restock request\n";
+			cout << "3. Search pending restock requests\n";
+			cout << "4. Display nearly sold out or out of stock product\n";
+			cout << "5. Modify your restock request information\n";
+			cout << "6. Cancel your restock request\n";
+			cout << "7. Quit\n";
+
+			cout << "\n";
+			cout << "Please select one from the table above\n";
+			message = "Enter : ";
+			user.getInt(message, selection, 1, 7);
+			system("cls");
+
+			switch (selection)
+			{
+			case insert:
+				restock.insertRestockRequest(staff);
+				break;
+			case view:
+				restock.viewRequest();
+				message = "Do you want to search specific restock request? <Y/N> : ";
+				user.getChoice(message, choice);
+				if (choice[0] == 'Y')
+				{
+					restock.searchRequest();
+				}
+				system("cls");
+				break;
+			case search:
+				restock.searchRequest();
+				break;
+			case viewProduct:
+				productManager.viewSoldOutProduct();
+				message = "Do you want request a restock? <Y/N> : ";
+				user.getChoice(message, choice);
+				system("cls");
+				if (choice[0] == 'Y')
+				{
+					restock.insertRestockRequest(staff);
+				}
+				break;
+			case update:
+				restock.updateMenu(staff);
+				break;
+			case cancel:
+				restock.deleteRequest(staff);
+				break;
+			case quit: 
+				return;
+				break;
+			}
+		}
+		break;
+	}
+
+}
+
+void supplierMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	SupplierManager supplierManager;
+	UserManager userManager;
+
+	enum List { insert = 1, view = 2, update = 3, quit = 4 };
+
+	while (1)
+	{
+		message = "Supplier Menu";
+		user.drawTittle(message, message.length() + 1, 8);
+		cout << "1. Add a new supplier\n";
+		cout << "2. Display all supplier\n";
+		cout << "3. Modify supplier information\n";
+		cout << "4. Quit\n";
+
+		cout << "Please select one from the table above\n";
+		message = "Enter : ";
+		user.getInt(message, selection, 1, 4);
+
+		switch (selection)
+		{
+		case insert:
+			system("cls");
+			supplierManager.insertSupplier();
+			break;
+		case view:
+			system("cls");
+			supplierManager.viewSupplier();
+			system("pause");
+			system("cls");
+			break;
+		case update:
+			system("cls");
+			supplierManager.updateMenu();
+		case quit:
+			system("cls");
+			return;
+			break;
+		}
+	}
+}
+
+void productTypeMenu(Staff* staff)
+{
+	UserInputManager user;
+	string message;
+	string choice;
+	int selection;
+	ProductTypeManager productType;
+	UserManager userManager;
+
+	enum List { insert = 1, view = 2, update = 3, quit = 4 };
+
+	while (1)
+	{
+		message = "Product Type Menu";
+		user.drawTittle(message, message.length() + 1, 8);
+		cout << "1. Add a new produuct type\n";
+		cout << "2. Display all product type\n";
+		cout << "3. Update product type information\n";
+		cout << "4. Quit\n";
+
+		cout << "\nPlease select one from the table above\n";
+		message = "Enter : ";
+		user.getInt(message, selection, 1, 4);
+
+		switch (selection)
+		{
+		case insert:
+			system("cls");
+			productType.insertProductType();
+			break;
+		case view:
+			system("cls");
+			productType.viewProductType();
+			system("pause");
+			system("cls");
+			break;
+		case update:
+			system("cls");
+			productType.updateMenu();
+		case quit:
+			system("cls");
+			return;
+			break;
+		}
+	}
+}
+
